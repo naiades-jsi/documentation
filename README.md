@@ -150,7 +150,7 @@ graph LR
     B --> |Data Fusion with Weather| D(LSTM Alicante Multivariate)
     B --> |Data Fusion Raw Cap.| E(Alicante Salinity)
     B --> |Data Fusion Raw Level| E
-    C --> |Uploder| X(Simavi DMV)
+    C --> |Uploder| X[Simavi DMV]
     D --> |Uploader| X
     E --> |Uploader| X
 ```
@@ -164,15 +164,15 @@ TODO
 ```mermaid
 graph LR
     A[SIMAVI Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
-    G[EPANET Simulations] --> E
+    G[EPANET Simulations] --> |File system| E
     B --> |Data Fusion| C(LSTM Braila Univariate)
     B --> |Data Fusion| D(Anomaly Detection Flow)
     B --> |Data Fusion| E(Leakage Detection)
-    A --> F(Precise Leakage Detection)
-    C --> |Uploader| X(Simavi DMV)
-    D --> X
-    E --> X
-    F --> X
+    A --> |?| F(Precise Leakage Detection)
+    C --> |Uploader| X[Simavi DMV]
+    D --> |Uploader| X
+    E --> |Uploader| X
+    F --> |?| X
 ```
 
 
