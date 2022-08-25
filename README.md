@@ -140,6 +140,8 @@ Optionally, you can pipe the output into a log file with a pip `python3 main.py 
 
 ## ALICANTE Deployment
 
+TODO
+
 ### ALICANTE Component Schema
 ```mermaid
 graph LR
@@ -156,6 +158,8 @@ graph LR
 
 
 ## BRAILA Deployment
+
+TODO
 
 ```mermaid
 graph LR
