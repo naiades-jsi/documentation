@@ -78,9 +78,9 @@ TODO
 ### CAROUGE Component Schema
 ```mermaid
 graph LR
-    A[Naiades Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
+    A[UDGA Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
     B --> |Data Fusion| C(Carouge Watering)
-    C --> |Uploder| D(Naiades DMV service)
+    C --> |Uploder| D(UDG DMV)
 ```
 
 * __FIWARE-adapter__
@@ -140,9 +140,36 @@ Optionally, you can pipe the output into a log file with a pip `python3 main.py 
 
 ## ALICANTE Deployment
 
+### ALICANTE Component Schema
+```mermaid
+graph LR
+    A[UDGA Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
+    B --> |Data Fusion| C(LSTM Alicante Univariate)
+    B --> |Data Fusion with Weather| D(LSTM Alicante Multivariate)
+    B --> |Data Fusion Raw Cap.| E(Alicante Salinity)
+    B --> |Data Fusion Raw Level| E
+    C --> |Uploder| X(Simavi DMV)
+    D --> |Uploader| X
+    E --> |Uploader| X
+```
+
 
 
 ## BRAILA Deployment
+
+```mermaid
+graph LR
+    A[SIMAVI Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
+    G[EPANET Simulations] --> E
+    B --> |Data Fusion| C(LSTM Braila Univariate)
+    B --> |Data Fusion| D(Anomaly Detection Flow)
+    B --> |Data Fusion| E(Leakage Detection)
+    A --> F(Precise Leakage Detection)
+    C --> |Uploader| X(Simavi DMV)
+    D --> X
+    E --> X
+    F --> X
+```
 
 
 # Additional Infrastructure
