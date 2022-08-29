@@ -80,7 +80,7 @@ TODO
 graph LR
     A[UDGA Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
     B --> |Data Fusion| C(Carouge Watering)
-    C --> |Uploder| D(UDG DMV)
+    C --> |Uploder| D(UDGA DMV)
 ```
 
 * __FIWARE-adapter__
@@ -169,7 +169,7 @@ graph LR
     B --> |Data Fusion| D(Anomaly Detection)
     B --> |Data Fusion| F(Precise Leakage Detection)
     B --> |Data Fusion| E(Leakage Detection)
-    A --> |FIWARE-adapter| H1(SAT Data Sever)
+    A --> |FIWARE-adapter'| H1(SAT Data Sever)
     H1 -.- |HTTP GET| H(State Analysis Tool)
     C --> |FIWARE-Uploader| X[Simavi DMV]
     D --> |FIWARE-Uploader| X
