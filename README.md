@@ -73,7 +73,14 @@ Prediction topics:
 
 ### CAROUGE Entities for Output Data
 
-TODO
+* Device 1f0d &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-1`
+* Device 1f08 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-2`
+* Device 1f10 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-3`
+* Device 1f06 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-4`
+* Device 1efd &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-5`
+* Device 1eff &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-6`
+* Device 1f02 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-7`
+* Device 1efe &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-8`
 
 ### CAROUGE Component Schema
 ```mermaid
