@@ -292,6 +292,8 @@ docker run -d --network=host e3ailab/uploader_alicante_ad_ircai
 // consumption
 docker run -d --network=host e3ailab/df_braila_forecasting_ircai
 docker run -d --network=host e3ailab/lstm_braila_univariate_ircai
+docker run -d --network=host e3ailab/uploader_braila_ad_ms_ircai
+docker run -d --network=host e3ailab/uploader_braila_ad_ircai
 // MISSING uploader?!
 
 ```
