@@ -21,7 +21,8 @@ Entity names:
 * FlowerBed 6 &rarr; `urn:ngsi-ld:Device:Device-1eff`
 * FlowerBed 7 &rarr; `urn:ngsi-ld:Device:Device-1f02`
 * FlowerBed 8 &rarr; `urn:ngsi-ld:Device:Device-1efe`
-* Weather Station &rarr; `urn:ngsi-ld:WeatherObserved:EnvironmentalStation`
+* Meteo Suisse Data &rarr; `urn:ngsi-ld:WeatherObserved:WeatherObserved`
+* __OBSOLETE__ &rarr; Weather Station &rarr; `urn:ngsi-ld:WeatherObserved:EnvironmentalStation`
 
 ### CAROUGE Influx Schema
 
@@ -73,7 +74,23 @@ Prediction topics:
 
 ### CAROUGE Entities for Output Data
 
-TODO
+Entrypoint for data retrieval (at UDGA):
+* `http://5.53.108.182:8668/v2/entities/{ENTITY_NAME}&lastN=1`
+
+Note: Alternatively, `http://5.53.108.182:8668/` can be replaced with `http://test.naiades-project.eu:8668`.
+
+Entity names:
+
+* FlowerBed 1 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-1`
+* FlowerBed 2 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-2`
+* FlowerBed 3 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-3`
+* FlowerBed 4 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-4`
+* FlowerBed 5 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-5`
+* FlowerBed 6 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-6`
+* FlowerBed 7 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-7`
+* FlowerBed 8 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-8`
+
+Checking fields: `nextWateringDeadline` &rarr; `values[0]`.
 
 ### CAROUGE Component Schema
 ```mermaid
@@ -109,6 +126,15 @@ graph LR
     * Starting: `python3 main.py -c deployment/carouge_watering.json`
     * DockerHub: `e3ailab/uploader_carouge_watering_ircai`
     * Starting docker: `docker run -d --network=host e3ailab/uploader_carouge_watering_ircai`
+
+Run everything for Carouge:
+´´´
+docker run -d --network=host e3ailab/fiware_adapter_ircai
+docker run -d --network=host e3ailab/df_carouge_w_ircai
+docker run -d --network=host e3ailab/carouge_ircai
+docker run -d --network=host e3ailab/uploader_carouge_watering_ircai
+´´´
+
 
 ### Monitoring Carouge Dataflow
 
@@ -155,7 +181,39 @@ graph LR
     E --> |FIWARE-Uploader| X
 ```
 
+### ALICANTE Entities for Output Data
 
+Entrypoint for data retrieval (at Simavi):
+* `http://naiades.simavi.ro:1026/v2/entities/{ENTITY_NAME}&lastN=1`
+
+#### Consumption Prediction
+
+Entity names:
+
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-alipark-1h` (1..23h, 1d ... 7d)
+* autobuses
+* benalua
+* diputacion
+* mercado
+* montaneta
+* rambla
+
+#### Salinity Intrusion
+
+Entity names:
+
+* FlowerBed 1 &rarr; `urn:ngsi-ld:Device:RO-EA003_36_conductivity-MetaSignal`
+* FlowerBed 1 &rarr; `urn:ngsi-ld:Device:RO-EA003_36_conductivity_up-MetaSignal`
+
+* 001_36_level-MetaSignal
+* 002_26
+* 003_21
+* 004_21
+* 005_21
+* 007_36
+* 008_36
+
+Checking fields: `dateObserved` &rarr; `value[0]`. Note, this is Context Broker.
 
 ## BRAILA Deployment
 
@@ -169,7 +227,7 @@ graph LR
     B --> |Data Fusion| D(Anomaly Detection)
     B --> |Data Fusion| F(Precise Leakage Detection)
     B --> |Data Fusion| E(Leakage Detection)
-    A --> |FIWARE-adapter'| H1(SAT Data Sever)
+    A --> |FIWARE-adapter via files| H1(SAT Data Sever)
     H1 -.- |HTTP GET| H(State Analysis Tool)
     C --> |FIWARE-Uploader| X[Simavi DMV]
     D --> |FIWARE-Uploader| X
@@ -212,7 +270,68 @@ graph LR
     * Deploy: on Atena server (not IRCAI); no DockerHub
     * Location: `/mnt/data/projects/naiades/ss2-psql`
 
+Run everything for Alicante:
+```
+docker run -d --network=host e3ailab/df_alicante_forecasting_w_ircai
+docker run -d --network=host e3ailab/df_alicante_forecasting_ircai
+docker run -d --network=host e3ailab/df_alicante_forecasting_ircai
+docker run -d --network=host e3ailab/lstm_alicante_univariate_ircai
+docker run -d --network=host e3ailab/lstm_alicante_multivariate_ircai
+docker run -d --network=host e3ailab/uploader_alicante_consumption_ircai
 
+
+// salinity
+docker run -d --network=host e3ailab/df_alicante_features_raw_ircai
+docker run -d --network=host e3ailab/df_alicante_level_freq_ircai
+docker run -d --network=host e3ailab/df_alicante_level_ircai
+docker run -d --network=host e3ailab/anomaly_detection_alicante_salinity_ircai
+docker run -d --network=host e3ailab/uploader_alicante_salinity_ms_ircai
+docker run -d --network=host e3ailab/uploader_alicante_ad_ircai
+
+
+// consumption
+docker run -d --network=host e3ailab/df_braila_forecasting_ircai
+docker run -d --network=host e3ailab/lstm_braila_univariate_ircai
+// MISSING uploader?!
+
+```
+
+
+
+### BRAILA Entities for Output Data
+
+Entrypoint for data retrieval (at Simavi):
+* `http://naiades.simavi.ro:1026/v2/entities/{ENTITY_NAME}&lastN=1`
+
+#### Consumption Prediction
+
+Entity names:
+
+* `urn:ngsi-ld:WaterConsumption-Romania:Romania-Braila-flow211206H360_1h` (1..23h, 1d ... 7d)
+* flow211306H360
+* flow318505H498
+
+#### Anomaly Detection
+
+Entity names:
+
+* FlowerBed 1 &rarr; `urn:ngsi-ld:Alert:RO-Braila-pressure_5770`
+* 5771
+* 5772
+* 5773
+* FlowerBed 1 &rarr; `urn:ngsi-ld:Device:RO-211206H360-MetaSignal`
+* 211306H360
+* 318505H498
+
+#### Leakages
+
+TODO
+
+* `urn:ngsi-ld:Alert:RO-Braila-leakageGroup`
+
+#### Accurate Leakage
+
+TODO
 
 # Additional Infrastructure
 
@@ -264,3 +383,8 @@ ba4e70a80576   e3ailab/carouge_ircai                               "python3 main
 ContainerID for InfluxDB is `281b7ca5e2b9` in this case. To enter the container you have to run: `docker exec -it 281b7ca5e2b9 /bin/bash`.
 
 Once in the container, run `influx auth list`; you have to choose the token for the `naiades` user.
+
+
+## Kafka
+
+Kafka is running on IRCAI machine. Start with `docker-compose up` on `D:\NAIADES\Kafka`.
