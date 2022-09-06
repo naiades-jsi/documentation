@@ -74,6 +74,7 @@ Prediction topics:
 
 ### CAROUGE Entities for Output Data
 
+<<<<<<< HEAD
 Entrypoint for data retrieval (at UDGA):
 * `http://5.53.108.182:8668/v2/entities/{ENTITY_NAME}&lastN=1`
 
@@ -91,6 +92,16 @@ Entity names:
 * FlowerBed 8 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-8`
 
 Checking fields: `nextWateringDeadline` &rarr; `values[0]`.
+=======
+* Device 1f0d &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-1`
+* Device 1f08 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-2`
+* Device 1f10 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-3`
+* Device 1f06 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-4`
+* Device 1efd &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-5`
+* Device 1eff &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-6`
+* Device 1f02 &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-7`
+* Device 1efe &rarr; `urn:ngsi-ld:FlowerBed:FlowerBed-8`
+>>>>>>> 324f0dd4b69286a989cc617edf1dad2508d90dde
 
 ### CAROUGE Component Schema
 ```mermaid
@@ -385,8 +396,11 @@ ba4e70a80576   e3ailab/carouge_ircai                               "python3 main
 ContainerID for InfluxDB is `281b7ca5e2b9` in this case. To enter the container you have to run: `docker exec -it 281b7ca5e2b9 /bin/bash`.
 
 Once in the container, run `influx auth list`; you have to choose the token for the `naiades` user.
+<<<<<<< HEAD
 
 
 ## Kafka
 
 Kafka is running on IRCAI machine. Start with `docker-compose up` on `D:\NAIADES\Kafka`.
+=======
+>>>>>>> 324f0dd4b69286a989cc617edf1dad2508d90dde
