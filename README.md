@@ -2,7 +2,7 @@
 
 ## CAROUGE Deployment
 
-Carouge is deployed on IRCAI machine. All components are dockerized.
+Carouge is deployed on IRCAI machine. All components are dockerized. NAIADES endpoint for input and output are deployed on UDGA.
 
 ### CAROUGE Entities for Input data
 
@@ -128,7 +128,7 @@ graph LR
     * Starting docker: `docker run -d --network=host e3ailab/uploader_carouge_watering_ircai`
 
 Run everything for Carouge:
-´´´
+´´´bash
 docker run -d --network=host e3ailab/fiware_adapter_ircai
 docker run -d --network=host e3ailab/df_carouge_w_ircai
 docker run -d --network=host e3ailab/carouge_ircai
@@ -166,7 +166,7 @@ Optionally, you can pipe the output into a log file with a pip `python3 main.py 
 
 ## ALICANTE Deployment
 
-TODO
+### ALICANTE Entities for Input data
 
 ### ALICANTE Component Schema
 ```mermaid
@@ -181,6 +181,22 @@ graph LR
     E --> |FIWARE-Uploader| X
 ```
 
+* __FIWARE-adapter__
+    * same as above
+* __Data Fusion__ (TODO)
+    * GitHub: https://github.com/naiades-jsi/data-fusion
+    * Use-case Config file: `config_data/config_carouge_*.json` _(Configs are generated on the fly, config file is not needed.)_
+    * General secrets file: `secrets.json` &larr; copy `secrets.example.json` (and update secrets)
+    * Starting: `python3 index.NAIDES.carouge_w.py`
+    * DockerHub: `e3ailab/df_carouge_w_ircai`
+    * Starting Docker: `docker run -d --network=host e3ailab/df_carouge_w_ircai`
+* __FIWARE-uploader__ (TODO)
+    * GitHub: https://github.com/gal9/FIWARE-uploader
+    * Config file: `config/deployment/carouge_watering.json`
+    * Starting: `python3 main.py -c deployment/carouge_watering.json`
+    * DockerHub: `e3ailab/uploader_carouge_watering_ircai`
+    * Starting docker: `docker run -d --network=host e3ailab/uploader_carouge_watering_ircai`
+
 ### ALICANTE Entities for Output Data
 
 Entrypoint for data retrieval (at Simavi):
@@ -191,27 +207,39 @@ Entrypoint for data retrieval (at Simavi):
 Entity names:
 
 * `urn:ngsi-ld:WaterConsumption:Spain-Alicante-alipark-1h` (1..23h, 1d ... 7d)
-* autobuses
-* benalua
-* diputacion
-* mercado
-* montaneta
-* rambla
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-autobuses-1h`
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-benalua-1h`
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-diputacion-1h`
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-mercado-1h`
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-montaneta-1h`
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-rambla-1h`
 
 #### Salinity Intrusion
 
 Entity names:
 
-* FlowerBed 1 &rarr; `urn:ngsi-ld:Device:RO-EA003_36_conductivity-MetaSignal`
-* FlowerBed 1 &rarr; `urn:ngsi-ld:Device:RO-EA003_36_conductivity_up-MetaSignal`
-
-* 001_36_level-MetaSignal
-* 002_26
-* 003_21
-* 004_21
-* 005_21
-* 007_36
-* 008_36
+* 001_36_level-MetaSignal ??
+* EA002_36
+    * `urn:ngsi-ld:Device:RO-EA002_36_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA002_36_conductivity_up-MetaSignal`
+* EA003_21
+    * `urn:ngsi-ld:Device:RO-EA003_21_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA003_21_conductivity_up-MetaSignal`
+* EA003_36
+    * `urn:ngsi-ld:Device:RO-EA003_36_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA003_36_conductivity_up-MetaSignal`
+* EA004_21
+    * `urn:ngsi-ld:Device:RO-EA004_21_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA004_21_conductivity_up-MetaSignal`
+* EA005_21
+    * `urn:ngsi-ld:Device:RO-EA005_21_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA005_21_conductivity_up-MetaSignal`
+* EA007_36
+    * `urn:ngsi-ld:Device:RO-EA007_36_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA007_36_conductivity_up-MetaSignal`
+* EA008_36
+    * `urn:ngsi-ld:Device:RO-EA008_36_conductivity-MetaSignal`
+    * `urn:ngsi-ld:Device:RO-EA008_36_conductivity_up-MetaSignal`
 
 Checking fields: `dateObserved` &rarr; `value[0]`. Note, this is Context Broker.
 
