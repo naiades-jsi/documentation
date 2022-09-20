@@ -370,6 +370,20 @@ DockerHub password is available at Aleš or Mark.
 
 ### Starting InfluxDB on IRCAI machine
 
+InfluxDB is running on IRCAI machine. Start with `docker-compose up` on `D:\Demos\NAIADES\InfluxDB`.
+We are using version 2.0.x.
+
+### Setup of InfluxDB
+
+Log into the container and add:
+
+```bash
+influx setup
+;add default bucket as alicante
+influx bucket create -n braila -o naiades -r 0
+influx bucket create -n carouge -o naiades -r 0
+```
+
 ### Obtaining InfluxDB Token
 
 Token can be obtained on IRCAI machine in the InfluxDB container. User has to identify InfluxDB docekr file by runing `docker ps`. The result would usually be something like this:
@@ -389,4 +403,4 @@ Once in the container, run `influx auth list`; you have to choose the token for 
 
 ## Kafka
 
-Kafka is running on IRCAI machine. Start with `docker-compose up` on `D:\NAIADES\Kafka`.
+Kafka is running on IRCAI machine. Start with `docker-compose up` on `D:\Demos\NAIADES\Kafka`.
