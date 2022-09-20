@@ -375,8 +375,9 @@ We are using version 2.0.x. We create initial user with corresponding NAIADES to
 
 ### Setup of InfluxDB
 
-Log into the container and add:
-```
+Log into the container and add the buckets:
+```bash
+influx bucket create -n alicante -o naiades_org -r 0
 influx bucket create -n braila -o naiades_org -r 0
 influx bucket create -n carouge -o naiades_org -r 0
 ```
