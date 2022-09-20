@@ -183,13 +183,22 @@ graph LR
 
 * __FIWARE-adapter__
     * same as above
-* __Data Fusion__ (TODO)
+* __Data Fusion__ _[consumption, NO weather]_
     * GitHub: https://github.com/naiades-jsi/data-fusion
-    * Use-case Config file: `config_data/config_carouge_*.json` _(Configs are generated on the fly, config file is not needed.)_
+    * Use-case Config file: `config_data/alicante_*_flow_forecasting_config.json` _(Configs are generated on the fly, config file is not needed.)_
     * General secrets file: `secrets.json` &larr; copy `secrets.example.json` (and update secrets)
-    * Starting: `python3 index.NAIDES.carouge_w.py`
-    * DockerHub: `e3ailab/df_carouge_w_ircai`
-    * Starting Docker: `docker run -d --network=host e3ailab/df_carouge_w_ircai`
+    * Starting: `python3 index.NAIDES.alicante_forecasting.py`
+    * DockerHub: `e3ailab/df_alicante_forecasting_ircai`
+    * Starting Docker: `docker run -d --network=host e3ailab/df_alicante_forecasting_ircai`
+* __Data Fusion__ _[consumption + weather]_
+    * Starting: `python3 index.NAIDES.alicante_forecasting_w.py`
+    * DockerHub: `e3ailab/df_alicante_forecasting_w_ircai`
+    * Starting Docker: `docker run -d --network=host e3ailab/df_alicante_forecasting_w_ircai`
+* __Data Fusion__ _[salinity, raw]_
+    * Starting: `python3 index.NAIDES.alicante_features_raw.py`
+    * DockerHub: `e3ailab/df_alicante_features_raw_ircai`
+    * Starting Docker: `docker run -d --network=host e3ailab/df_alicante_features_raw_ircai`
+* __Data Fusion__ _[salinity, level]_
 * __FIWARE-uploader__ (TODO)
     * GitHub: https://github.com/gal9/FIWARE-uploader
     * Config file: `config/deployment/carouge_watering.json`
