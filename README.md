@@ -371,17 +371,14 @@ DockerHub password is available at Aleš or Mark.
 ### Starting InfluxDB on IRCAI machine
 
 InfluxDB is running on IRCAI machine. Start with `docker-compose up` on `D:\Demos\NAIADES\InfluxDB`.
-We are using version 2.0.x.
+We are using version 2.0.x. We create initial user with corresponding NAIADES token.
 
 ### Setup of InfluxDB
 
 Log into the container and add:
-
-```bash
-influx setup
-;add default bucket as alicante
-influx bucket create -n braila -o naiades -r 0
-influx bucket create -n carouge -o naiades -r 0
+```
+influx bucket create -n braila -o naiades_org -r 0
+influx bucket create -n carouge -o naiades_org -r 0
 ```
 
 ### Obtaining InfluxDB Token
