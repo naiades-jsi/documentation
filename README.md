@@ -382,6 +382,10 @@ influx bucket create -n braila -o naiades_org -r 0
 influx bucket create -n carouge -o naiades_org -r 0
 ```
 
+### Integrated Chronograph
+
+Data can be accesed via integrated viewer at http://localhost:8086 (Chronograph).
+
 ### Obtaining InfluxDB Token
 
 Token can be obtained on IRCAI machine in the InfluxDB container. User has to identify InfluxDB docekr file by runing `docker ps`. The result would usually be something like this:
