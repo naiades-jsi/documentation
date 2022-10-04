@@ -1,5 +1,39 @@
 # JSI NAIADES Documentation
 
+## MONITORING Tools (wf-monitor)
+
+#### Monitoring Dataflow
+
+For monitoring o
+
+### Monitoring Dataflow Development Version
+
+Attach to `/bin/bash` on `ubuntu:20.04` container on IRCAI machine (find container id with `docker ps | grep ubuntu`) and attacht to it with `docker exec -it CONTAINER_ID /bin/bash`. If container is running you can skip to the section starting with "Finally, ...".
+
+If it is not running, start it with: `docker run -it --network=host --entrypoint /bin/bash ubuntu:20.04 --name=monitoring_development` (TODO: check if this is true).
+
+If you started the new Ubuntu container, you would have to update it by running:
+```bash
+apt-get update -y
+apt-get install -y python3-pip python3-dev
+apt-get install git
+```
+
+Next, you would have to clone the `NAIADES/wf-monitor` directory into `/home/` by running:
+```bash
+cd /home
+git clone https://github.com/naiades-jsi/wf-monitor
+cd wf-monitor
+pip install -r requirements.txt
+```
+
+Finally, you run the workflow diagnostics with:
+```bash
+python3 main.py -w carouge
+```
+
+Optionally, you can pipe the output into a log file with a pip `python3 main.py -w carouge &> logs/carouge.log` and view the log with some other tool.
+
 ## CAROUGE Deployment
 
 Carouge is deployed on IRCAI machine. All components are dockerized. NAIADES endpoint for input and output are deployed on UDGA.
@@ -135,34 +169,6 @@ docker run -d --network=host e3ailab/carouge_ircai
 docker run -d --network=host e3ailab/uploader_carouge_watering_ircai
 ´´´
 
-
-### Monitoring Carouge Dataflow
-
-Attach to `/bin/bash` on `ubuntu:20.04` container on IRCAI machine (find container id with `docker ps | grep ubuntu`) and attacht to it with `docker exec -it CONTAINER_ID /bin/bash`. If container is running you can skip to the section starting with "Finally, ...".
-
-If it is not running, start it with: `docker run -it --network=host --entrypoint /bin/bash ubuntu:20.04` (TODO: check if this is true).
-
-If you started the new Ubuntu container, you would have to update it by running:
-```bash
-apt-get update -y
-apt-get install -y python3-pip python3-dev
-apt-get install git
-```
-
-Next, you would have to clone the `NAIADES/wf-monitor` directory into `/home/` by running:
-```bash
-cd /home
-git clone https://github.com/naiades-jsi/wf-monitor
-cd wf-monitor
-pip install -r requirements.txt
-```
-
-Finally, you run the workflow diagnostics with:
-```bash
-python3 main.py -w carouge
-```
-
-Optionally, you can pipe the output into a log file with a pip `python3 main.py -w carouge &> logs/carouge.log` and view the log with some other tool.
 
 ## ALICANTE Deployment
 
