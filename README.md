@@ -177,7 +177,7 @@ docker run -d --network=host e3ailab/uploader_carouge_watering_ircai
 ### ALICANTE Component Schema
 ```mermaid
 graph LR
-    A[UDGA Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
+    A[SIMAVI Historic API] --> |FIWARE-adapter| B[(InfluxDB)]
     B --> |Data Fusion| C(LSTM Alicante Univariate)
     B --> |Data Fusion with Weather| D(LSTM Alicante Multivariate)
     B --> |Data Fusion Raw Cap.| E(Alicante Salinity)
@@ -196,21 +196,33 @@ graph LR
     * Starting: `python3 index.NAIDES.alicante_forecasting.py`
     * DockerHub: `e3ailab/df_alicante_forecasting_ircai`
     * Starting Docker: `docker run -d --network=host e3ailab/df_alicante_forecasting_ircai`
-* __Data Fusion__ _[consumption + weather]_
-    * Starting: `python3 index.NAIDES.alicante_forecasting_w.py`
+* __Data Fusion__ _[consumption, weather]_
     * DockerHub: `e3ailab/df_alicante_forecasting_w_ircai`
     * Starting Docker: `docker run -d --network=host e3ailab/df_alicante_forecasting_w_ircai`
 * __Data Fusion__ _[salinity, raw]_
     * Starting: `python3 index.NAIDES.alicante_features_raw.py`
     * DockerHub: `e3ailab/df_alicante_features_raw_ircai`
     * Starting Docker: `docker run -d --network=host e3ailab/df_alicante_features_raw_ircai`
-* __Data Fusion__ _[salinity, level]_
 * __FIWARE-uploader__ (TODO)
-    * GitHub: https://github.com/gal9/FIWARE-uploader
-    * Config file: `config/deployment/carouge_watering.json`
-    * Starting: `python3 main.py -c deployment/carouge_watering.json`
-    * DockerHub: `e3ailab/uploader_carouge_watering_ircai`
-    * Starting docker: `docker run -d --network=host e3ailab/uploader_carouge_watering_ircai`
+    * Config file: `config/deployment/alicante_consumption.json`
+    * DockerHub: `e3ailab/uploader_alicante_consumption_ircai`
+    * Starting docker: `docker run -d --network=host e3ailab/uploader_alicante_consumption_ircai`
+
+
+Run everything for Alicante:
+```bash
+// consumption
+docker run -d --network=host e3ailab/df_alicante_forecasting_ircai
+docker run -d --network=host e3ailab/lstm_alicante_univariate_ircai
+docker run -d --network=host e3ailab/df_alicante_forecasting_w_ircai
+docker run -d --network=host e3ailab/lstm_alicante_multivariate_ircai
+docker run -d --network=host e3ailab/uploader_alicante_consumption_ircai
+
+// salinity
+docker run -d --network=host e3ailab/df_alicante_features_raw_ircai
+docker run -d --network=host e3ailab/anomaly_detection_alicante_salinity_ircai
+docker run -d --network=host e3ailab/uploader_alicante_salinity_ms_ircai
+```
 
 ### ALICANTE Entities for Output Data
 
@@ -221,7 +233,7 @@ Entrypoint for data retrieval (at Simavi):
 
 Entity names:
 
-* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-alipark-1h` (1..23h, 1d ... 7d)
+* `urn:ngsi-ld:WaterConsumption:Spain-Alicante-alipark-1h` (1 ... 23h, 1d ... 7d)
 * `urn:ngsi-ld:WaterConsumption:Spain-Alicante-autobuses-1h`
 * `urn:ngsi-ld:WaterConsumption:Spain-Alicante-benalua-1h`
 * `urn:ngsi-ld:WaterConsumption:Spain-Alicante-diputacion-1h`
@@ -268,7 +280,7 @@ graph LR
     G[EPANET Simulations] --> |File system| E
     B --> |Data Fusion| C(LSTM Braila Univariate)
     B --> |Data Fusion| D(Anomaly Detection)
-    B --> |Data Fusion| F(Precise Leakage Detection)
+    A --> |FIWARE-adapter via Kafka| F(Precise Leakage Detection)
     B --> |Data Fusion| E(Leakage Detection)
     A --> |FIWARE-adapter via files| H1(SAT Data Sever)
     H1 -.- |HTTP GET| H(State Analysis Tool)
@@ -313,24 +325,9 @@ graph LR
     * Deploy: on Atena server (not IRCAI); no DockerHub
     * Location: `/mnt/data/projects/naiades/ss2-psql`
 
-Run everything for Alicante:
-```
-docker run -d --network=host e3ailab/df_alicante_forecasting_w_ircai
-docker run -d --network=host e3ailab/df_alicante_forecasting_ircai
-docker run -d --network=host e3ailab/df_alicante_forecasting_ircai
-docker run -d --network=host e3ailab/lstm_alicante_univariate_ircai
-docker run -d --network=host e3ailab/lstm_alicante_multivariate_ircai
-docker run -d --network=host e3ailab/uploader_alicante_consumption_ircai
+Run everything for Braila:
 
-
-// salinity
-docker run -d --network=host e3ailab/df_alicante_features_raw_ircai
-docker run -d --network=host e3ailab/df_alicante_level_freq_ircai
-docker run -d --network=host e3ailab/df_alicante_level_ircai
-docker run -d --network=host e3ailab/anomaly_detection_alicante_salinity_ircai
-docker run -d --network=host e3ailab/uploader_alicante_salinity_ms_ircai
-docker run -d --network=host e3ailab/uploader_alicante_ad_ircai
-
+```bash
 
 // consumption
 docker run -d --network=host e3ailab/df_braila_forecasting_ircai
@@ -404,6 +401,9 @@ After this, we move to the IRCAI machine. As we usually need to update the deplo
 and finally:
 
 * `docker run -d --network="host" DOCKERHUB_NAME`
+
+### Useful hints
+For Windows server (IRCAI) you can use `docker logs <CONTAINER_ID> 2>&1 | findstr /C:"ERROR"` to only display lines from docker logs containing string `"ERROR"`.
 
 ## DockerHub `e3ailab`
 
