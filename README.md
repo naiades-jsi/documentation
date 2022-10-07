@@ -1,5 +1,27 @@
 # JSI NAIADES Documentation
 
+## Current status of the system
+
+*Updated: 2022-10-07 (KK)*
+| Component                     | Alicante          | Braila            | Carouge           |
+| ----------------------------- |:-----------------:|:-----------------:|:-----------------:|
+| Kafka                         | ![](assets/y.png) | ![](assets/y.png) | ![](assets/y.png) |
+| InfluxDB                      | ![](assets/y.png) | ![](assets/y.png) | ![](assets/y.png) |
+| WF-monitor                    | ![](assets/y.png) | ![](assets/y.png) | ![](assets/y.png) |
+| WF-monitor fail-safe          | ![](assets/n.png) | ![](assets/n.png) | ![](assets/n.png) |
+| Data Fusion                   | ![](assets/y.png) | ![](assets/y.png) | ![](assets/y.png) |
+| Anomaly Detection             | ![](assets/y.png) |                   |                   |
+| Uploader Anomaly              | ![](assets/y.png) |                   |                   |
+| Consumption Prediction        | ![](assets/m.png) | ![](assets/m.png) |                   |
+| Uploader Consumption          | ![](assets/y.png) | ![](assets/n.png) |                   |
+| Watering                      |                   |                   | ![](assets/y.png) |
+| Uploader Watering             |                   |                   | ![](assets/y.png) |
+| Approximate Leakage Detection |                   | ![](assets/m.png) |                   |
+| Uploader Approximate LD       |                   | ![](assets/n.png) |                   |
+| Accurate Leakage Detection    |                   | ![](assets/n.png) |                   |
+| Uploader Accurate LD          |                   | ![](assets/n.png) |                   |
+
+
 ## MONITORING Tools (wf-monitor)
 
 #### Monitoring Dataflow
