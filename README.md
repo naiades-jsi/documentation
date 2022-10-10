@@ -13,7 +13,7 @@
 | Anomaly Detection             | ![](assets/y.png) |                   |                   |
 | Uploader Anomaly              | ![](assets/y.png) |                   |                   |
 | Consumption Prediction        | ![](assets/m.png) | ![](assets/m.png) |                   |
-| Uploader Consumption          | ![](assets/y.png) | ![](assets/n.png) |                   |
+| Uploader Consumption          | ![](assets/y.png) | ![](assets/y.png) |                   |
 | Watering                      |                   |                   | ![](assets/y.png) |
 | Uploader Watering             |                   |                   | ![](assets/y.png) |
 | Approximate Leakage Detection |                   | ![](assets/m.png) |                   |
