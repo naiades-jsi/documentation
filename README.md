@@ -16,8 +16,8 @@
 | Uploader Consumption          | ![](assets/y.png) | ![](assets/y.png) |                   |
 | Watering                      |                   |                   | ![](assets/y.png) |
 | Uploader Watering             |                   |                   | ![](assets/y.png) |
-| Approximate Leakage Detection |                   | ![](assets/m.png) |                   |
-| Uploader Approximate LD       |                   | ![](assets/n.png) |                   |
+| Approximate Leakage Detection |                   | ![](assets/n.png) |                   |
+| Uploader Approximate LD       |                   | ![](assets/y.png) |                   |
 | Accurate Leakage Detection    |                   | ![](assets/n.png) |                   |
 | Uploader Accurate LD          |                   | ![](assets/n.png) |                   |
 
