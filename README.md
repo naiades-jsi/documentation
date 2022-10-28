@@ -12,8 +12,8 @@
 | Data Fusion                   | ![](assets/y.png) | ![](assets/y.png) | ![](assets/y.png) |
 | Anomaly Detection             | ![](assets/y.png) |                   |                   |
 | Uploader Anomaly              | ![](assets/y.png) |                   |                   |
-| Consumption Prediction        | ![](assets/m.png) | ![](assets/m.png) |                   |
-| Uploader Consumption          | ![](assets/y.png) | ![](assets/m.png) |                   |
+| Consumption Prediction        | ![](assets/y.png) | ![](assets/y.png) |                   |
+| Uploader Consumption          | ![](assets/y.png) | ![](assets/y.png) |                   |
 | Watering                      |                   |                   | ![](assets/y.png) |
 | Uploader Watering             |                   |                   | ![](assets/y.png) |
 | Approximate Leakage Detection |                   | ![](assets/y.png) |                   |
